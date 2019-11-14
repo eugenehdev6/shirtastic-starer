@@ -13,7 +13,11 @@ export const AboutPageTemplate = ({ title, contacts, description, logo }) => {
   return (
     <div className={styles.aboutContainer}>
       <h1>{title}</h1>
-      {logo && <Img className="col-sm-10 col-lg-4 mb-4" fluid={logo.childImageSharp.fluid} />}
+      {logo && logo.childImageSharp ? (
+        <Img className="col-sm-10 col-lg-4 mb-4" fluid={logo.childImageSharp.fluid} />
+      ) : (
+        logo && <img src={logo} alt="Netlify image preview" />
+      )}
       <div dangerouslySetInnerHTML={{ __html: description }} />
       {contacts && (
         <div className="d-flex align-items-center flex-column w-100 justify-content-between">

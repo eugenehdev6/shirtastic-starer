@@ -13,7 +13,7 @@ const AboutPagePreview = ({ entry, widgetFor }) => {
       title={entry.getIn(["data", "title"])}
       contacts={contacts}
       logo={entry.getIn(["data", "image"])}
-      description={widgetFor("body").props.value}
+      description={widgetFor("body")}
     />
   )
 }
