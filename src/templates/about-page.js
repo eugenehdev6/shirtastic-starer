@@ -1,15 +1,13 @@
 import React from "react"
-import { graphql } from "gatsby"
 import Layout from "../hoc/layout"
 import SEO from "../components/seo"
 import { Col, Row } from "react-bootstrap"
-import styles from "./about.module.scss"
-const About = ({ data }) => {
-  const { title, contacts, description } = data.site.siteMetadata
-
+import styles from "./about-page.module.scss"
+const AboutPage = ({ title, contacts, description }) => {
+  console.log("Function: AboutPage, title: ", title)
   return (
     <Layout>
-      <SEO title={"About"} />
+      <SEO title={"AboutPage"} />
       <div className={styles.aboutContainer}>
         <h1>{title}</h1>
         <div>{description}</div>
@@ -29,18 +27,4 @@ const About = ({ data }) => {
   )
 }
 
-export default About
-export const query = graphql`
-  {
-    site {
-      siteMetadata {
-        title
-        description
-        contacts {
-          email
-          phone
-        }
-      }
-    }
-  }
-`
+export default AboutPage

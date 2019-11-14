@@ -1,28 +1,60 @@
 module.exports = {
   siteMetadata: {
     title: `Shirtastic Starter`,
-    description: `This project presents capability of using JAM stack. You are going to learn how to set up the server-less project with outstanding performance. We will go through the steps that familiarize us with GatsbyJS, GraphQL and Netlify CMS. In the end of our bootcamp we'll deploy our project to Netlify`,
-    contacts: {
-      email: "info@dev6.com",
-      phone: "+1 (000) 000 0000",
-    },
+    description: `JAM stack bootcamp`,
     author: `dev6`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     {
-      resolve: `gatsby-source-filesystem`,
+      // keep as first gatsby-source-filesystem plugin for gatsby image support
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: `data`,
-        path: `${__dirname}/src/data`,
+        path: `${__dirname}/static/images`,
+        name: "uploads",
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: `images`,
         path: `${__dirname}/src/images`,
+        name: "images",
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/src/pages`,
+        name: "pages",
+      },
+    },
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-relative-images",
+            options: {
+              name: "uploads",
+            },
+          },
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 2048,
+            },
+          },
+          {
+            resolve: "gatsby-remark-copy-linked-files",
+            options: {
+              destinationDir: "static",
+            },
+          },
+        ],
       },
     },
     `gatsby-transformer-sharp`,
@@ -57,6 +89,12 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/logo.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.js`,
       },
     },
   ],
