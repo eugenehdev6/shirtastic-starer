@@ -3,7 +3,7 @@ backend:
   branch: exercise-7-final
 
 media_folder: static/images
-public_folder: /imades
+public_folder: /images
 
 collections:
   - name: "pages"
@@ -15,6 +15,7 @@ collections:
         fields:
           - { label: "Template Key", name: "templateKey", widget: "hidden", default: "about-page" }
           - { label: "Title", name: "title", widget: "string" }
+          - { label: "Logo", name: "image", widget: "image" }
           - { label: "Contact Email", name: "email", widget: "string" }
           - { label: "Contact Phone", name: "phone", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }

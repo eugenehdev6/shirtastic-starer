@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import AboutPage from "../templates/about-page"
+import { AboutPageTemplate } from "../templates/about-page"
 
 const AboutPagePreview = ({ entry, widgetFor }) => {
   console.log('Function: AboutPagePreview, entry.getIn(["data"]): ', entry.getIn(["data"]))
@@ -8,7 +8,14 @@ const AboutPagePreview = ({ entry, widgetFor }) => {
     email: entry.getIn(["data", "email"]),
     phone: entry.getIn(["data", "phone"]),
   }
-  return <AboutPage title={entry.getIn(["data", "title"])} contacts={contacts} description={widgetFor("body")} />
+  return (
+    <AboutPageTemplate
+      title={entry.getIn(["data", "title"])}
+      contacts={contacts}
+      logo={entry.getIn(["data", "image"])}
+      description={widgetFor("body").props.value}
+    />
+  )
 }
 
 AboutPagePreview.propTypes = {
