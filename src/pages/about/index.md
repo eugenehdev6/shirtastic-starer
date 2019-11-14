@@ -1,7 +1,7 @@
 ---
-templateKey: 'about-page'
-path: /about
+templateKey: about-page
 title: About Shirtastic
+image: /imades/screen-shot-2019-11-14-at-3.18.00-pm.png
 email: info@dev6.com
 phone: +1 (000) 000 0000
 ---
