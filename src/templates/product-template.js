@@ -4,6 +4,7 @@ import Layout from "../hoc/layout"
 import { graphql } from "gatsby"
 
 export const ProductPageTemplate = ({ name, gender, description, items }) => {
+  console.log("Function: ProductPageTemplate, items: ", items)
   return (
     <div>
       <h1>{name}</h1>

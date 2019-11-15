@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { ProductPageTemplate } from "../templates/product-template"
 
 const ProductPagePreview = ({ entry, widgetFor }) => {
-  const productItems = entry.getIn(["data", "items"])
+  const productItems = entry.getIn(["data", "variants"])
   const items = productItems ? productItems.toJS() : []
   return (
     <ProductPageTemplate
