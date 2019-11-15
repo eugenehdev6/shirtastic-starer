@@ -8,8 +8,6 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 
 export const AboutPageTemplate = ({ title, contacts, description, logo }) => {
-  console.log("Function: AboutPageTemplate, description: ", description)
-  console.log("Function: AboutPageTemplate, logo: ", logo)
   return (
     <div className={styles.aboutContainer}>
       <h1>{title}</h1>
