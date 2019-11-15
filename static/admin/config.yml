@@ -27,7 +27,6 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Template Key", name: "templateKey", widget: "hidden", default: "product-template" }
-      - { name: date, label: Date, widget: datetime }
       - { name: "name", label: "Name", widget: string }
       - { name: "body", label: "Body", widget: markdown}
       - { label: "Gender", name: "gender", widget: "select", options: ["M", "W"] }

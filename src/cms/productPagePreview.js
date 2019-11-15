@@ -2,16 +2,17 @@ import React from "react"
 import PropTypes from "prop-types"
 import { ProductPageTemplate } from "../templates/product-template"
 
-const ProductPagePreview = ({ entry, getAsset }) => {
+const ProductPagePreview = ({ entry, widgetFor }) => {
   const productItems = entry.getIn(["data", "items"])
   const items = productItems ? productItems.toJS() : []
-  const productData = {
-    items,
-    gender: entry.getIn(["data", "gender"]),
-    description: entry.getIn(["data", "description"]),
-    name: entry.getIn(["data", "name"]),
-  }
-  return <ProductPageTemplate data={productData} />
+  return (
+    <ProductPageTemplate
+      description={widgetFor("body").props.value}
+      gender={entry.getIn(["data", "gender"])}
+      items={items}
+      name={entry.getIn(["data", "name"])}
+    />
+  )
 }
 
 ProductPagePreview.propTypes = {
