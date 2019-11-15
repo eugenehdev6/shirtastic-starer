@@ -9,9 +9,10 @@ const ProductItem = ({ productItem }) => {
   const [selectedItem, setSelected] = useState()
 
   useEffect(() => {
+    console.log("Function: , productItem: ", productItem)
     setSelected({
       ...productItem,
-      items: productItem.items.reduce((prev, curr) => (prev.price < curr.price ? prev : curr)),
+      items: productItem.frontmatter.variants.reduce((prev, curr) => (prev.price < curr.price ? prev : curr)),
     })
   }, [productItem])
 
@@ -29,15 +30,16 @@ const ProductItem = ({ productItem }) => {
               />
               <span>Available sizes:</span>
               <div className="d-flex flex-row align-items-center justify-content-between">
-                {selectedItem.items.size.map((size, index) => (
-                  <div key={index} className="mx-2 font-weight-bold">
-                    {size}
-                  </div>
-                ))}
+                {selectedItem.items.size && (
+                  // .map((size, index) => (
+                  <div className="mx-2 font-weight-bold">{selectedItem.items.size}</div>
+                )
+                // ))
+                }
               </div>
             </div>
             <Row className={styles.optionsContainer}>
-              {productItem.items
+              {productItem.frontmatter.variants
                 .filter(item => item.id !== selectedItem.items.id)
                 .map(item => (
                   <Col

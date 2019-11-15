@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: exercise-7-final
+  branch: test
 
 media_folder: static/images
 public_folder: /images
@@ -19,3 +19,21 @@ collections:
           - { label: "Contact Email", name: "email", widget: "string" }
           - { label: "Contact Phone", name: "phone", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
+  - name: "product"
+    label: "Products"
+    folder: "src/pages/products"
+    create: true
+    identifier_field: name
+    slug: "{{slug}}"
+    fields:
+      - { label: "Template Key", name: "templateKey", widget: "hidden", default: "product-template" }
+      - { name: date, label: Date, widget: datetime }
+      - { name: "name", label: "Name", widget: string }
+      - { name: "body", label: "Body", widget: markdown}
+      - { label: "Gender", name: "gender", widget: "select", options: ["M", "W"] }
+      - {
+        label: Product Variants,
+        name: variants,
+        widget: list,
+        fields: [{ label: Photo, name: image, widget: image }, { label: Price, name: price, widget: number, valueType: "float" }, { label: Stock, name: qty, widget: number, valueType: "int" }, { label: "Sizes", name: "size", widget: "select", multiple: true, options: ["S", "M", "L"] }],
+      }
