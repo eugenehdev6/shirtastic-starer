@@ -3,25 +3,19 @@ import ProductItem from "../components/product-item"
 import Layout from "../hoc/layout"
 import { graphql } from "gatsby"
 
-export const ProductPageTemplate = ({ name, gender, description, items }) => {
-  console.log("Function: ProductPageTemplate, items: ", items)
-  return (
-    <div>
-      <h1>{name}</h1>
-      <p>{description}</p>
-      <div>{gender}</div>
-    </div>
-  )
-}
+export const ProductPageTemplate = ({ name, gender, description, items }) => (
+  <div>
+    <h1>{name}</h1>
+    <p>{description}</p>
+    <div>{gender}</div>
+  </div>
+)
 
-const ProductPage = ({ data }) => {
-  data.markdownRemark.description = data.markdownRemark.html
-  return (
-    <Layout>
-      <ProductItem productItem={data.markdownRemark} />
-    </Layout>
-  )
-}
+const ProductPage = ({ data }) => (
+  <Layout>
+    <ProductItem productItem={data.markdownRemark} />
+  </Layout>
+)
 
 export const pageQuery = graphql`
   query ProductByID($id: String!) {
@@ -32,9 +26,10 @@ export const pageQuery = graphql`
         gender
         name
         variants {
+          productId
           image {
             childImageSharp {
-              fixed(width: 200, quality: 100) {
+              fixed(width: 160, quality: 100) {
                 ...GatsbyImageSharpFixed
               }
             }

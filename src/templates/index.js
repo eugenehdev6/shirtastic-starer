@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 
 import CatalogTabs from "../components/catalog-tabs"
 import Layout from "../hoc/layout"
@@ -9,8 +9,7 @@ import { navigate } from "../../.cache/gatsby-browser-entry"
 import { useStateValue } from "../state/state"
 
 const IndexPage = ({ data, pageContext }) => {
-  // const { allDataJson, images } = data
-
+  const { allMarkdownRemark } = data
   const { currentPage, numPages } = pageContext
   const [{ category }] = useStateValue()
   const handlePageSelected = async ({ selected }) => {
@@ -22,7 +21,7 @@ const IndexPage = ({ data, pageContext }) => {
       <SEO title="Home" />
       <CatalogTabs />
       <ProductsList
-        items={[]}
+        items={allMarkdownRemark.edges}
         currentPage={currentPage}
         numPages={numPages}
         pageSelected={data => handlePageSelected(data)}
@@ -30,31 +29,36 @@ const IndexPage = ({ data, pageContext }) => {
     </Layout>
   )
 }
-// export const query = graphql`
-//   query productListQuery($skip: Int!, $limit: Int!, $gender: String!) {
-//     allDataJson(limit: $limit, skip: $skip, filter: { gender: { regex: $gender } }) {
-//       edges {
-//         node {
-//           id
-//           items {
-//             id
-//             image {
-//               childImageSharp {
-//                 fluid(maxWidth: 300, quality: 100) {
-//                   ...GatsbyImageSharpFluid
-//                 }
-//               }
-//             }
-//             price
-//             qty
-//             size
-//           }
-//           gender
-//           description
-//           name
-//         }
-//       }
-//     }
-//   }
-// `
+
+export const query = graphql`
+  query productListQuery($skip: Int!, $limit: Int!, $gender: String!) {
+    allMarkdownRemark(
+      limit: $limit
+      skip: $skip
+      filter: { frontmatter: { templateKey: { eq: "product-template" }, gender: { regex: $gender } } }
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            name
+            variants {
+              productId
+              image {
+                childImageSharp {
+                  fluid(maxWidth: 300, quality: 100) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+              price
+              qty
+              size
+            }
+          }
+        }
+      }
+    }
+  }
+`
 export default IndexPage

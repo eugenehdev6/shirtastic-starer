@@ -7,8 +7,8 @@ import "./product-list.scss"
 
 const ProductsList = ({ items, currentPage, numPages, pageSelected }) => {
   const shirts = items.map(item => (
-    <Col key={item.id} xs lg={4} md={6} sm={12}>
-      <ProductCard item={item} />
+    <Col key={item.node.id} xs lg={4} md={6} sm={12}>
+      <ProductCard item={item.node} />
     </Col>
   ))
 

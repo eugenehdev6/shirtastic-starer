@@ -34,5 +34,5 @@ collections:
         label: Product Variants,
         name: variants,
         widget: list,
-        fields: [{ label: Photo, name: image, widget: image }, { label: Price, name: price, widget: number, valueType: "float" }, { label: Stock, name: qty, widget: number, valueType: "int" }, { label: "Sizes", name: "size", widget: "select", multiple: true, options: ["S", "M", "L"] }],
+        fields: [{ name: "productId", label: "Product ID", widget: string }, { label: Photo, name: image, widget: image }, { label: Price, name: price, widget: number, valueType: "float" }, { label: Stock, name: qty, widget: number, valueType: "int" }, { label: "Sizes", name: "size", widget: "select", multiple: true, options: ["S", "M", "L"] }],
       }

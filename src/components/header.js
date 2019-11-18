@@ -22,7 +22,6 @@ const Header = ({ siteTitle }) => {
       }
     }
   `)
-  console.log("Function: Header, data: ", data)
   return (
     <header className={headerStyles.container}>
       <Navbar variant="light" sticky={"top"} className={`py-0 ${headerStyles.shadowNav}`}>

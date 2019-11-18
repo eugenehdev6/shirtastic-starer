@@ -14,7 +14,6 @@ const ProductItem = ({ productItem }) => {
       items: productItem.frontmatter.variants.reduce((prev, curr) => (prev.price < curr.price ? prev : curr)),
     })
   }, [productItem])
-  console.log("Function: ProductItem, selectedItem: ", selectedItem)
   const [{ cart }, dispatch] = useStateValue()
   return (
     <>
@@ -38,13 +37,13 @@ const ProductItem = ({ productItem }) => {
             </div>
             <Row className={styles.optionsContainer}>
               {productItem.frontmatter.variants
-                .filter(item => item.id !== selectedItem.items.id)
+                .filter(item => item.productId !== selectedItem.items.productId)
                 .map(item => (
                   <Col
                     className={styles.pointer}
                     xs={12}
                     lg={4}
-                    key={item.id}
+                    key={item.productId}
                     onClick={() => setSelected({ ...selectedItem, items: item })}
                   >
                     <Img
@@ -57,8 +56,8 @@ const ProductItem = ({ productItem }) => {
             </Row>
           </div>
           <div className={styles.detailsContainer}>
-            <h3>{selectedItem.name}</h3>
-            <div className={styles.description}>{selectedItem.description}</div>
+            <h3>{selectedItem.frontmatter.name}</h3>
+            <div className={styles.description} dangerouslySetInnerHTML={{ __html: selectedItem.html }} />
             <div className={styles.infoContainer}>
               <div className={styles.price}>Price: ${selectedItem.items.price}</div>
               <div className={styles.price}>In stock: {selectedItem.items.qty}</div>

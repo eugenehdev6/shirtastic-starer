@@ -85,7 +85,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
   const productsWomen = allProducts.data.allMarkdownRemark.edges.filter(edge => edge.node.frontmatter.gender === "W")
-  console.log("Function: createPages, productsWomen: ", productsWomen)
   const numPagesWomen = Math.ceil(productsWomen.length / productsPerPage)
   Array.from({ length: numPagesMen }).forEach((_, i) => {
     createPage({
@@ -122,79 +121,3 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
   }
 }
-
-//   allMarkdownRemark(
-//     sort: { order: DESC, fields: [frontmatter___date] }
-//   filter: { frontmatter: { templateKey: { eq: "product-template" } } }
-// ) {
-//     edges {
-//       node {
-//         excerpt(pruneLength: 400)
-//         id
-//         fields {
-//           slug
-//         }
-//         frontmatter {
-//           title
-//           templateKey
-//           date(formatString: "MMMM DD, YYYY")
-//           featuredpost
-//           featuredimage {
-//             childImageSharp {
-//               fluid(maxWidth: 120, quality: 100) {
-//               ...GatsbyImageSharpFluid
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-
-// const products = result.data.allMarkdownRemark.edges
-// console.log("Function: , products: ", products)
-// const productsPerPage = 3
-// const numPages = Math.ceil(products.length / productsPerPage)
-// Array.from({ length: numPages }).forEach((_, i) => {
-//   createPage({
-//     path: i === 0 ? `/` : `/${i + 1}`,
-//     component: path.resolve("./src/templates/index.js"),
-//     context: {
-//       limit: productsPerPage,
-//       skip: i * productsPerPage,
-//       numPages,
-//       currentPage: i + 1,
-//       // gender: "//",
-//     },
-//   })
-// })
-// const productsMen = result.data.allMarkdownRemark.edges.filter(edge => edge.node.gender === "M")
-// const numPagesMen = Math.ceil(productsMen.length / productsPerPage)
-// Array.from({ length: numPagesMen }).forEach((_, i) => {
-//   createPage({
-//     path: i === 0 ? `/men` : `/men/${i + 1}`,
-//     component: path.resolve("./src/templates/index.js"),
-//     context: {
-//       limit: productsPerPage,
-//       skip: i * productsPerPage,
-//       numPages: numPagesMen,
-//       currentPage: i + 1,
-//       gender: "/M/",
-//     },
-//   })
-// })
-// const productsWomen = result.data.allMarkdownRemark.edges.filter(edge => edge.node.gender === "W")
-// const numPagesWomen = Math.ceil(productsWomen.length / productsPerPage)
-// Array.from({ length: numPagesMen }).forEach((_, i) => {
-//   createPage({
-//     path: i === 0 ? `/women` : `/women/${i + 1}`,
-//     component: path.resolve("./src/templates/index.js"),
-//     context: {
-//       limit: productsPerPage,
-//       skip: i * productsPerPage,
-//       numPages: numPagesWomen,
-//       currentPage: i + 1,
-//       gender: "/W/",
-//     },
-//   })
-// })

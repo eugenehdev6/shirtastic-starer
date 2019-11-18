@@ -17,7 +17,7 @@ const ProductCard = ({ item }) => {
   const [featuredItem, setFeatured] = useState()
   const [{ cart }, dispatch] = useStateValue()
   useEffect(() => {
-    const bestPriceItem = item.items.reduce((prev, curr) => {
+    const bestPriceItem = item.frontmatter.variants.reduce((prev, curr) => {
       return prev.price < curr.price ? prev : curr
     })
     setFeatured({ ...item, items: bestPriceItem })
