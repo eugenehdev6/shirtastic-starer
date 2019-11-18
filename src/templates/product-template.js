@@ -7,7 +7,7 @@ export const ProductPageTemplate = ({ name, gender, description, items }) => (
   <div>
     <h1>{name}</h1>
     <p>{description}</p>
-    <div>{gender}</div>
+    <span>{gender}</span>
   </div>
 )
 

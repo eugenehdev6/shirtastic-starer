@@ -7,7 +7,7 @@ const ProductPagePreview = ({ entry, widgetFor }) => {
   const items = productItems ? productItems.toJS() : []
   return (
     <ProductPageTemplate
-      description={widgetFor("body").props.value}
+      description={widgetFor("body")}
       gender={entry.getIn(["data", "gender"])}
       items={items}
       name={entry.getIn(["data", "name"])}
