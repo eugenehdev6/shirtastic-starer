@@ -8,16 +8,6 @@ exports.createPages = ({ graphql, actions, reporter }) => {
         edges {
           node {
             id
-            items {
-              id
-              image
-              price
-              qty
-              size
-            }
-            gender
-            description
-            name
           }
         }
       }
