@@ -2,7 +2,6 @@ import React from "react"
 
 import CatalogTabs from "../components/catalog-tabs"
 import Layout from "../hoc/layout"
-import SEO from "../components/seo"
 import ProductsList from "../components/products-list"
 import { graphql } from "gatsby"
 import { navigate } from "../../.cache/gatsby-browser-entry"
@@ -18,7 +17,6 @@ const IndexPage = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
       <CatalogTabs />
       <ProductsList
         items={allDataJson.edges}

@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../hoc/layout"
-import SEO from "../components/seo"
 import { Col, Row } from "react-bootstrap"
 import styles from "./about.module.scss"
 const About = ({ data }) => {
@@ -9,7 +8,6 @@ const About = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={"About"} />
       <div className={styles.aboutContainer}>
         <h1>{title}</h1>
         <div>{description}</div>
