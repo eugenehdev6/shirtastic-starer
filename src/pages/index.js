@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 
 import CatalogTabs from "../components/catalog-tabs"
 import Layout from "../hoc/layout"
-import SEO from "../components/seo"
 import ProductsList from "../components/products-list"
 import { dataSource } from "../data/data"
 const IndexPage = () => {
@@ -25,7 +24,6 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
       <CatalogTabs onSelect={id => setCategory(id)} selectedId={category} />
       <ProductsList items={data} />
     </Layout>
