@@ -17,7 +17,8 @@ const ProductCard = ({ item }) => {
   const [{ cart }, dispatch] = useStateValue()
 
   const handleAddToCart = () => {
-    dispatch({ type: ADD_TO_CART, payload: item.frontmatter })
+    const selectedItem = item.frontmatter.variants[0]
+    dispatch({ type: ADD_TO_CART, payload: { ...item, items: selectedItem } })
   }
   return (
     <>
