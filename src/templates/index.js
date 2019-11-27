@@ -22,7 +22,10 @@ const IndexPage = ({ data, pageContext }) => {
       <SEO />
       <CatalogTabs />
       <ProductsList
-        items={allMarkdownRemark.edges.map(edge => edge.node)}
+        items={allMarkdownRemark.edges.map(edge => {
+          edge.node.frontmatter.variants.sort((a, b) => (a.price < b.price ? -1 : 1))
+          return edge.node
+        })}
         currentPage={currentPage}
         numPages={numPages}
         pageSelected={data => handlePageSelected(data)}

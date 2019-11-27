@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Card } from "react-bootstrap"
 import styles from "./product-card.module.scss"
@@ -14,31 +14,23 @@ import { navigate } from "../../.cache/gatsby-browser-entry"
 const ProductCard = ({ item }) => {
   const [isHoveredCart, setHoveredCart] = useState(false)
   const [isHoveredEdit, setHoveredEdit] = useState(false)
-  const [featuredItem, setFeatured] = useState()
   const [{ cart }, dispatch] = useStateValue()
-  useEffect(() => {
-    const bestPriceItem = item.frontmatter.variants.reduce((prev, curr) => {
-      return prev.price < curr.price ? prev : curr
-    })
-    setFeatured({ ...item, items: bestPriceItem })
-    return () => {}
-  }, [item])
-  const handleAddToCart = () => {
-    dispatch({ type: ADD_TO_CART, payload: featuredItem })
-  }
 
+  const handleAddToCart = () => {
+    dispatch({ type: ADD_TO_CART, payload: item.frontmatter })
+  }
   return (
     <>
-      {featuredItem && (
+      {item.frontmatter.variants && (
         <Card className={styles.card}>
-          <Link to={`/product/${featuredItem.id}`} className={styles.link}>
+          <Link to={`/product/${item.id}`} className={styles.link}>
             <Img
               className="card-img-top"
-              fluid={featuredItem.items.image.childImageSharp.fluid}
-              alt={featuredItem.name}
+              fluid={item.frontmatter.variants[0].image.childImageSharp.fluid}
+              alt={item.frontmatter.variants[0].name}
             />
-            <Card.Title className={styles.cardTitle}>{featuredItem.name}</Card.Title>
-            <Card.Body className={styles.cardDescription}>{featuredItem.description}</Card.Body>
+            <Card.Title className={styles.cardTitle}>{item.frontmatter.variants[0].name}</Card.Title>
+            <Card.Body className={styles.cardDescription}>{item.frontmatter.variants[0].description}</Card.Body>
           </Link>
 
           <div className={styles.actionsContainer}>
@@ -53,14 +45,14 @@ const ProductCard = ({ item }) => {
                 setHoveredCart(false)
               }}
             />
-            <strong>${featuredItem.items.price}</strong>
+            <strong>${item.frontmatter.variants[0].price}</strong>
             <ArrowNextIcon
               color={isHoveredEdit ? "#0F5279" : "#10A2DC"}
               size={1.9}
               onMouseEnter={() => {
                 setHoveredEdit(true)
               }}
-              onClick={() => navigate(`/product/${featuredItem.id}`)}
+              onClick={() => navigate(`/product/${item.id}`)}
               onMouseLeave={() => {
                 setHoveredEdit(false)
               }}
